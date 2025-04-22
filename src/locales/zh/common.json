@@ -142,5 +142,6 @@
   "Widget is not loaded immediately with the parent page. The widget sends its": "小部件不会与父页面立即加载。小部件会发送其",
   "id": "id",
   "attribute so you can listen for it as in the example below to ensure its loaded and ready to listen for messages.": "属性，以便您可以像下面的示例那样监听它，确保它已加载并准备好接收消息。",
-  "Open JSON Crack": "打开 JSON Crack"
+  "Open JSON Crack": "打开 JSON Crack",
+  "JSON to YAML Converter": "JSON 转 YAML 转换器"
 }

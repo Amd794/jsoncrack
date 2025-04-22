@@ -1,11 +1,12 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { Menu, Flex } from "@mantine/core";
 import { JSONSchemaFaker } from "json-schema-faker";
 import { event as gaEvent } from "nextjs-google-analytics";
 import toast from "react-hot-toast";
 import { CgChevronDown } from "react-icons/cg";
 import { FaRandom } from "react-icons/fa";
-import { MdFilterListAlt } from "react-icons/md";
+import { MdFilterListAlt, MdOutlineCompareArrows } from "react-icons/md";
 import { SiJsonwebtokens } from "react-icons/si";
 import { VscSearchFuzzy, VscJson, VscGroupByRefType } from "react-icons/vsc";
 import { useTranslation } from "../../../hooks/useTranslation";
@@ -21,6 +22,7 @@ export const ToolsMenu = () => {
   const setContents = useFile(state => state.setContents);
   const getFormat = useFile(state => state.getFormat);
   const { t } = useTranslation();
+  const router = useRouter();
 
   const randomizeData = async () => {
     try {
@@ -67,6 +69,11 @@ export const ToolsMenu = () => {
       console.error(error);
       toast.error(t("Error"));
     }
+  };
+
+  const goToJsonToYamlConverter = () => {
+    router.push("/converter/json-to-yaml");
+    gaEvent("go_to_json_yaml_converter");
   };
 
   return (
@@ -132,6 +139,14 @@ export const ToolsMenu = () => {
         </Menu.Item>
         <Menu.Item fz={12} leftSection={<FaRandom />} onClick={randomizeData}>
           {t("Randomize Data")}
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item
+          fz={12}
+          leftSection={<MdOutlineCompareArrows />}
+          onClick={goToJsonToYamlConverter}
+        >
+          {t("JSON to YAML Converter")}
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>

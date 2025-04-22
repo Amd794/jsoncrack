@@ -142,5 +142,6 @@
   "Widget is not loaded immediately with the parent page. The widget sends its": "Widget is not loaded immediately with the parent page. The widget sends its",
   "id": "id",
   "attribute so you can listen for it as in the example below to ensure its loaded and ready to listen for messages.": "attribute so you can listen for it as in the example below to ensure its loaded and ready to listen for messages.",
-  "Open JSON Crack": "Open JSON Crack"
+  "Open JSON Crack": "Open JSON Crack",
+  "JSON to YAML Converter": "JSON to YAML Converter"
 }
