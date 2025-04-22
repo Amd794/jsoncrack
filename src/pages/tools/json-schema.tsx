@@ -6,6 +6,7 @@ import { NextSeo } from "next-seo";
 import { LuCheck, LuCircleX } from "react-icons/lu";
 import { SEO } from "../../constants/seo";
 import { FileFormat, TypeLanguage } from "../../enums/file.enum";
+import { useTranslation } from "../../hooks/useTranslation";
 import { editorOptions } from "../../layout/ConverterLayout/options";
 import Layout from "../../layout/PageLayout";
 import { generateType } from "../../lib/utils/generateType";
@@ -17,6 +18,7 @@ const JSONSchemaTool = () => {
   const [jsonSchemaError, setJsonSchemaError] = React.useState(false);
   const [json, setJson] = React.useState("");
   const [jsonSchema, setJsonSchema] = React.useState("");
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     monacoRef.current?.languages.json.jsonDefaults.setDiagnosticsOptions({
@@ -67,12 +69,12 @@ const JSONSchemaTool = () => {
     <Layout>
       <NextSeo
         {...SEO}
-        title="JSON Schema Validator & Generator"
+        title={t("JSON Schema Validator & Generator")}
         description="Use our JSON Schema Validator & Generator tool to easily validate and generate JSON schemas, and generate data from JSON schemas. Simply input your JSON data, generate the corresponding schema, and validate your data with ease."
         canonical="https://jsoncrack.cmdragon.cn/tools/json-schema"
       />
       <Container mt="xl" size="xl">
-        <Title c="black">JSON Schema Validator & Generator</Title>
+        <Title c="black">{t("JSON Schema Validator & Generator")}</Title>
         <Flex pt="lg" gap="lg">
           <Button
             onClick={generateJsonSchema}
@@ -80,7 +82,7 @@ const JSONSchemaTool = () => {
             size="md"
             disabled={!json.length || jsonError}
           >
-            Generate JSON Schema
+            {t("Generate JSON Schema")}
           </Button>
           <Button
             onClick={generateJson}
@@ -88,7 +90,7 @@ const JSONSchemaTool = () => {
             size="md"
             disabled={!jsonSchema.length || jsonSchemaError}
           >
-            Generate JSON
+            {t("Generate JSON")}
           </Button>
         </Flex>
         <Flex pt="lg" gap="40">

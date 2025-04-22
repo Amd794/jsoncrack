@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Button, Text } from "@mantine/core";
 import styled from "styled-components";
+import { useTranslation } from "../../../../hooks/useTranslation";
 import { UpgradeContent } from "../../../modals/UpgradeModal";
 
 const StyledNotSupported = styled.div`
@@ -141,13 +142,15 @@ const StyledContent = styled.div`
 `;
 
 export const NotSupported = () => {
+  const { t } = useTranslation();
+
   return (
     <StyledNotSupported>
       <StyledContent>
         <UpgradeContent direction="column-reverse" maw="550" />
         <Text c="dimmed" maw="400" my="lg" ta="center">
-          JSON Crack is unable to support data of this size. <br />
-          Try the new editor for better performance.
+          {t("Unable to support data of this size")} <br />
+          {t("Try the new editor")}
         </Text>
         <Link
           rel="noopener"
@@ -156,7 +159,7 @@ export const NotSupported = () => {
           passHref
         >
           <Button size="lg" color="teal" radius="xl">
-            Upgrade now
+            {t("Upgrade now")}
           </Button>
         </Link>
       </StyledContent>

@@ -67,14 +67,14 @@ export const DownloadModal = ({ opened, onClose }: ModalProps) => {
   const { t } = useTranslation();
   const [extension, setExtension] = React.useState(Extensions.PNG);
   const [fileDetails, setFileDetails] = React.useState({
-    filename: "jsoncrack.com",
+    filename: new Date().toLocaleString(),
     backgroundColor: "#FFFFFF",
     quality: 1,
   });
 
   const clipboardImage = async () => {
     try {
-      toast.loading("Copying to clipboard...", { id: "toastClipboard" });
+      toast.loading(t("Copying to clipboard..."), { id: "toastClipboard" });
 
       const imageElement = document.querySelector("svg[id*='ref']") as HTMLElement;
 
@@ -91,10 +91,10 @@ export const DownloadModal = ({ opened, onClose }: ModalProps) => {
         }),
       ]);
 
-      toast.success("Copied to clipboard");
+      toast.success(t("Copied to clipboard"));
       gaEvent("clipboard_img");
     } catch (error) {
-      toast.error("Failed to copy to clipboard");
+      toast.error(t("Failed to copy to clipboard"));
     } finally {
       toast.dismiss("toastClipboard");
       onClose();
@@ -103,7 +103,7 @@ export const DownloadModal = ({ opened, onClose }: ModalProps) => {
 
   const exportAsImage = async () => {
     try {
-      toast.loading("Downloading...", { id: "toastDownload" });
+      toast.loading(t("Downloading..."), { id: "toastDownload" });
 
       const imageElement = document.querySelector("svg[id*='ref']") as HTMLElement;
 
@@ -115,7 +115,7 @@ export const DownloadModal = ({ opened, onClose }: ModalProps) => {
       downloadURI(dataURI, `${fileDetails.filename}.${extension}`);
       gaEvent("download_img", { label: extension });
     } catch (error) {
-      toast.error("Failed to download image!");
+      toast.error(t("Failed to download image!"));
     } finally {
       toast.dismiss("toastDownload");
       onClose();

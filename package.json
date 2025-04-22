@@ -7,9 +7,6 @@
     "email": "aykutsarac0@gmail.com"
   },
   "homepage": "https://jsoncrack.cmdragon.cn",
-  "bugs": {
-    "url": "https://github.com/AykutSarac/jsoncrack.com/issues"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

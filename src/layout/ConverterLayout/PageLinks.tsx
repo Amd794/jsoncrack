@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Anchor, Button, Flex, List, SimpleGrid, Stack } from "@mantine/core";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { formats } from "../../enums/file.enum";
+import { useTranslation } from "../../hooks/useTranslation";
 
 const languages = formats.map(format => format.label);
 
@@ -25,6 +26,8 @@ function groupCombinations(array: string[]): Record<string, string[]> {
 const groupedLanguages = groupCombinations(languages);
 
 export const PageLinks = () => {
+  const { t } = useTranslation();
+
   return (
     <Flex justify="space-between" align="center">
       <Stack gap="sm" py="md" justify="center">
@@ -43,7 +46,7 @@ export const PageLinks = () => {
             border: "none",
           }}
         >
-          Open JSON Crack
+          {t("Open JSON Crack")}
         </Button>
       </Stack>
       <SimpleGrid cols={4} w="fit-content">

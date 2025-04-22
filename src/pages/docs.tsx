@@ -1,17 +1,12 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import { Group, Paper, Stack, Text, Title } from "@mantine/core";
 import { CodeHighlight } from "@mantine/code-highlight";
 import styled from "styled-components";
 import { NextSeo } from "next-seo";
 import { SEO } from "../constants/seo";
+import { useTranslation } from "../hooks/useTranslation";
 import Layout from "../layout/PageLayout";
-
-const StyledFrame = styled.iframe`
-  border: none;
-  width: 80%;
-  flex: 500px;
-  margin: 3% auto;
-`;
 
 const StyledContentBody = styled.div`
   display: flex;
@@ -35,31 +30,38 @@ const StyledHighlight = styled.span<{ $link?: boolean; $alert?: boolean }>`
   margin: ${({ $alert }) => ($alert ? "8px 0" : "1px")};
 `;
 
+// 动态导入 CodepenEmbed 组件，禁用服务器端渲染
+const CodepenEmbed = dynamic(() => import("../components/CodepenEmbed"), {
+  ssr: false,
+});
+
 const Docs = () => {
+  const { t } = useTranslation();
+
   return (
     <Layout>
       <NextSeo
         {...SEO}
-        title="Documentation - JSON Crack"
-        description="Integrate JSON Crack widgets into your website."
+        title={t("Documentation - JSON Crack")}
+        description={t("Integrate JSON Crack widgets into your website.")}
         canonical="https://jsoncrack.cmdragon.cn/docs"
       />
       <Stack mx="auto" maw="90%">
         <Group mb="lg" mt={40}>
           <Title order={1} c="dark">
-            Embed
+            {t("Embed")}
           </Title>
         </Group>
         <Paper bg="white" c="black" p="md" radius="md" withBorder>
           <Title mb="sm" order={3} c="dark">
-            # Fetching from URL
+            # {t("Fetching from URL")}
           </Title>
           <StyledContentBody>
             <Text>
-              By adding <StyledHighlight>?json=https://catfact.ninja/fact</StyledHighlight> query at
-              the end of iframe src you will be able to fetch from URL at widgets without additional
-              scripts. This applies to editor page as well, the following link will fetch the url at
-              the editor:{" "}
+              {t("By adding")} <StyledHighlight>?json=https://catfact.ninja/fact</StyledHighlight>{" "}
+              {t(
+                "query at the end of iframe src you will be able to fetch from URL at widgets without additional scripts. This applies to editor page as well, the following link will fetch the url at the editor:"
+              )}{" "}
               <StyledHighlight
                 as="a"
                 href="https://jsoncrack.cmdragon.cn/editor?json=https://catfact.ninja/fact"
@@ -69,34 +71,27 @@ const Docs = () => {
               </StyledHighlight>
             </Text>
 
-            <StyledFrame
-              title="Untitled"
-              src="https://codepen.io/AykutSarac/embed/KKBpWVR?default-tab=html%2Cresult"
-              loading="eager"
-            >
-              See the Pen <a href="https://codepen.io/AykutSarac/pen/KKBpWVR">Untitled</a> by Aykut
-              Saraç (<a href="https://codepen.io/AykutSarac">@AykutSarac</a>) on{" "}
-              <a href="https://codepen.io">CodePen</a>.
-            </StyledFrame>
+            <CodepenEmbed id="KKBpWVR" title="Fetching from URL Example" defaultTab="html,result" />
           </StyledContentBody>
         </Paper>
         <Paper bg="white" c="black" p="md" radius="md" withBorder>
           <Title mb="sm" order={3} c="dark">
-            # Communicating with API
+            # {t("Communicating with API")}
           </Title>
-          <Title order={4}>◼︎ Post Message to Embed</Title>
+          <Title order={4}>◼︎ {t("Post Message to Embed")}</Title>
           <StyledContentBody>
             <Text>
-              Communicating with the embed is possible with{" "}
+              {t("Communicating with the embed is possible with")}{" "}
               <StyledHighlight
                 as="a"
                 href="https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/postMessage"
                 $link
               >
-                MessagePort
+                {t("MessagePort")}
               </StyledHighlight>
-              , you should pass an object consist of &quot;json&quot; and &quot;options&quot; key
-              where json is a string and options is an object that may contain the following:
+              {t(
+                ', you should pass an object consist of "json" and "options" key where json is a string and options is an object that may contain the following:'
+              )}
               <CodeHighlight
                 w={500}
                 language="json"
@@ -107,40 +102,31 @@ const Docs = () => {
               />
             </Text>
 
-            <StyledFrame
+            <CodepenEmbed
+              id="rNrVyWP"
+              title="Post Message Example"
+              defaultTab="html,result"
               scrolling="no"
-              title="Untitled"
-              src="https://codepen.io/AykutSarac/embed/rNrVyWP?default-tab=html%2Cresult"
-              loading="lazy"
-            >
-              See the Pen <a href="https://codepen.io/AykutSarac/pen/rNrVyWP">Untitled</a> by Aykut
-              Saraç (<a href="https://codepen.io/AykutSarac">@AykutSarac</a>) on{" "}
-              <a href="https://codepen.io">CodePen</a>.
-            </StyledFrame>
+            />
           </StyledContentBody>
         </Paper>
         <Paper bg="white" c="black" p="md" radius="md" withBorder>
-          <Title order={4}>◼︎ On Page Load</Title>
+          <Title order={4}>◼︎ {t("On Page Load")}</Title>
           <StyledContentBody>
             <Text>
               <Text>
-                ⚠️ <b>Important!</b> - iframe should be defined before the script tag
+                ⚠️ <b>{t("Important!")}</b> - {t("iframe should be defined before the script tag")}
               </Text>
               <Text>
-                ⚠️ <b>Note</b> - Widget is not loaded immediately with the parent page. The widget
-                sends its <b>id</b> attribute so you can listen for it as in the example below to
-                ensure its loaded and ready to listen for messages.
+                ⚠️ <b>{t("Note")}</b> -{" "}
+                {t("Widget is not loaded immediately with the parent page. The widget sends its")}{" "}
+                <b>{t("id")}</b>{" "}
+                {t(
+                  "attribute so you can listen for it as in the example below to ensure its loaded and ready to listen for messages."
+                )}
               </Text>
             </Text>
-            <StyledFrame
-              title="Untitled"
-              src="https://codepen.io/AykutSarac/embed/QWBbpqx?default-tab=html%2Cresult"
-              loading="lazy"
-            >
-              See the Pen <a href="https://codepen.io/AykutSarac/pen/QWBbpqx">Untitled</a> by Aykut
-              Saraç (<a href="https://codepen.io/AykutSarac">@AykutSarac</a>) on{" "}
-              <a href="https://codepen.io">CodePen</a>.
-            </StyledFrame>
+            <CodepenEmbed id="QWBbpqx" title="On Page Load Example" defaultTab="html,result" />
           </StyledContentBody>
         </Paper>
       </Stack>

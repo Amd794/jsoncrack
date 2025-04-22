@@ -2,8 +2,6 @@ import React from "react";
 import { Inter } from "next/font/google";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme } from "../../constants/theme";
-import { Footer } from "./Footer";
-import { Navbar } from "./Navbar";
 
 const inter = Inter({
   subsets: ["latin-ext"],
@@ -17,11 +15,7 @@ const StyledLayoutWrapper = styled.div`
 const PageLayout = ({ children }: React.PropsWithChildren) => {
   return (
     <ThemeProvider theme={lightTheme}>
-      <StyledLayoutWrapper>
-        <Navbar />
-        {children}
-        <Footer />
-      </StyledLayoutWrapper>
+      <StyledLayoutWrapper>{children}</StyledLayoutWrapper>
     </ThemeProvider>
   );
 };

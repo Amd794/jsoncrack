@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { event as gaEvent } from "nextjs-google-analytics";
 import { BiSolidDockLeft } from "react-icons/bi";
 import { VscCheck, VscError, VscRunAll, VscSync, VscSyncIgnored } from "react-icons/vsc";
+import { useTranslation } from "../../hooks/useTranslation";
 import useConfig from "../../store/useConfig";
 import useFile from "../../store/useFile";
 import useGraph from "./views/GraphView/stores/useGraph";
@@ -80,6 +81,7 @@ export const BottomBar = () => {
   const nodeCount = useGraph(state => state.nodes.length);
   const toggleFullscreen = useGraph(state => state.toggleFullscreen);
   const fullscreen = useGraph(state => state.fullscreen);
+  const { t } = useTranslation();
 
   const toggleEditor = () => {
     toggleFullscreen(!fullscreen);
@@ -103,7 +105,7 @@ export const BottomBar = () => {
                 <Flex align="center" gap={2}>
                   <VscError color="red" />
                   <Text c="red" fw={500} fz="xs">
-                    Invalid
+                    {t("Invalid")}
                   </Text>
                 </Flex>
               </Popover.Target>
@@ -114,7 +116,7 @@ export const BottomBar = () => {
           ) : (
             <Flex align="center" gap={2}>
               <VscCheck />
-              <Text size="xs">Valid</Text>
+              <Text size="xs">{t("Valid")}</Text>
             </Flex>
           )}
         </StyledBottomBarItem>
@@ -125,18 +127,20 @@ export const BottomBar = () => {
           }}
         >
           {liveTransformEnabled ? <VscSync /> : <VscSyncIgnored />}
-          <Text fz="xs">Live Transform</Text>
+          <Text fz="xs">{t("Live Transform")}</Text>
         </StyledBottomBarItem>
         {!liveTransformEnabled && (
           <StyledBottomBarItem onClick={() => setContents({})} disabled={!!error}>
             <VscRunAll />
-            Click to Transform
+            {t("Click to Transform")}
           </StyledBottomBarItem>
         )}
       </StyledLeft>
 
       <StyledRight>
-        <StyledBottomBarItem>Nodes: {nodeCount}</StyledBottomBarItem>
+        <StyledBottomBarItem>
+          {t("Nodes")}: {nodeCount}
+        </StyledBottomBarItem>
       </StyledRight>
     </StyledBottomBar>
   );

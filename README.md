@@ -57,9 +57,9 @@ JSON Crack is a tool for visualizing JSON data in a structured, interactive grap
 
 ### Built With
 
-- [Next.js](https://nextjs.org/?ref=jsoncrack.com)
-- [React.js](https://reactjs.org/?ref=jsoncrack.com)
-- [Reaflow](https://reaflow.dev/?ref=jsoncrack.com)
+- [Next.js](https://nextjs.org/?ref=https://jsoncrack.cmdrago.cn)
+- [React.js](https://reactjs.org/?ref=https://jsoncrack.cmdrago.cn)
+- [Reaflow](https://reaflow.dev/?ref=https://jsoncrack.cmdrago.cn)
 - [Monaco Editor](https://github.com/suren-atoyan/monaco-react)
 
 ## Stay Up-to-Date
