@@ -8,6 +8,7 @@ import { FaRandom } from "react-icons/fa";
 import { MdFilterListAlt } from "react-icons/md";
 import { SiJsonwebtokens } from "react-icons/si";
 import { VscSearchFuzzy, VscJson, VscGroupByRefType } from "react-icons/vsc";
+import { useTranslation } from "../../../hooks/useTranslation";
 import { jsonToContent } from "../../../lib/utils/jsonAdapter";
 import useFile from "../../../store/useFile";
 import useJson from "../../../store/useJson";
@@ -19,28 +20,52 @@ export const ToolsMenu = () => {
   const getJson = useJson(state => state.getJson);
   const setContents = useFile(state => state.setContents);
   const getFormat = useFile(state => state.getFormat);
+  const { t } = useTranslation();
 
   const randomizeData = async () => {
     try {
+      // 获取JSON数据
+      const jsonData = getJson();
+
+      // 检查JSON数据是否有效
+      if (!jsonData || typeof jsonData !== "string" || jsonData.trim() === "") {
+        toast.error(t("Invalid JSON!"));
+        return;
+      }
+
       // generate json schema
       const { run } = await import("json_typegen_wasm");
       const jsonSchema = run(
         "Root",
-        getJson(),
+        jsonData,
         JSON.stringify({
           output_mode: "json_schema",
         })
       );
 
+      // 验证生成的schema是否有效
+      if (!jsonSchema || typeof jsonSchema !== "string" || jsonSchema.trim() === "") {
+        toast.error(t("Invalid Schema"));
+        return;
+      }
+
+      let parsedSchema;
+      try {
+        parsedSchema = JSON.parse(jsonSchema);
+      } catch (parseError) {
+        toast.error(t("Invalid Schema"));
+        return;
+      }
+
       // generate random data
-      const randomJson = JSONSchemaFaker.generate(JSON.parse(jsonSchema));
+      const randomJson = JSONSchemaFaker.generate(parsedSchema);
       const contents = await jsonToContent(JSON.stringify(randomJson, null, 2), getFormat());
       setContents({ contents });
 
       gaEvent("randomize_data");
     } catch (error) {
       console.error(error);
-      toast.error("Failed to generate mock data");
+      toast.error(t("Error"));
     }
   };
 
@@ -49,7 +74,7 @@ export const ToolsMenu = () => {
       <Menu.Target>
         <StyledToolElement onClick={() => gaEvent("show_tools_menu")}>
           <Flex align="center" gap={3}>
-            Tools <CgChevronDown />
+            {t("Tools")} <CgChevronDown />
           </Flex>
         </StyledToolElement>
       </Menu.Target>
@@ -62,7 +87,7 @@ export const ToolsMenu = () => {
             gaEvent("open_jq_modal");
           }}
         >
-          JSON Query (jq)
+          {t("JSON Query (jq)")}
         </Menu.Item>
         <Menu.Item
           fz={12}
@@ -72,7 +97,7 @@ export const ToolsMenu = () => {
             gaEvent("open_schema_modal");
           }}
         >
-          JSON Schema
+          {t("JSON Schema")}
         </Menu.Item>
         <Menu.Item
           fz={12}
@@ -82,7 +107,7 @@ export const ToolsMenu = () => {
             gaEvent("open_json_path_modal");
           }}
         >
-          JSON Path
+          {t("JSON Path")}
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item
@@ -93,7 +118,7 @@ export const ToolsMenu = () => {
             gaEvent("open_jwt_modal");
           }}
         >
-          Decode JWT
+          {t("Decode JWT")}
         </Menu.Item>
         <Menu.Item
           fz={12}
@@ -103,10 +128,10 @@ export const ToolsMenu = () => {
             gaEvent("open_type_modal");
           }}
         >
-          Generate Type
+          {t("Generate Type")}
         </Menu.Item>
         <Menu.Item fz={12} leftSection={<FaRandom />} onClick={randomizeData}>
-          Randomize Data
+          {t("Randomize Data")}
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>

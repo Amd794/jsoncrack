@@ -12,7 +12,7 @@ const Privacy = () => {
         {...SEO}
         title="Privacy Policy - JSON Crack"
         description="JSON Crack Privacy Policy"
-        canonical="https://jsoncrack.com/legal/privacy"
+        canonical="https://jsoncrack.cmdragon.cn/legal/privacy"
       />
       <Container my={50} size="md" pb="lg">
         <Paper bg="transparent">

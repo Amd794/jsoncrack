@@ -45,7 +45,7 @@ const ExternalMode = () => {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       if (window.location.pathname.includes("widget")) return setExternal(false);
-      if (window.location.host !== "jsoncrack.com") return setExternal(true);
+      if (window.location.host !== "jsoncrack.cmdragon.cn") return setExternal(true);
       return setExternal(false);
     }
   }, []);
@@ -69,8 +69,8 @@ const ExternalMode = () => {
           <StyledTitle>Dear valued user,</StyledTitle>
           <Text>
             We would like to inform you that you are presently utilizing the external release of the{" "}
-            <Anchor href="https://jsoncrack.com">JSON Crack</Anchor>. Your continued support is
-            crucial in sustaining and improving our services.
+            <Anchor href="https://jsoncrack.cmdragon.cn">JSON Crack</Anchor>. Your continued support
+            is crucial in sustaining and improving our services.
             <br />
             <br />
             We kindly encourage you to consider upgrading to the premium version, which not only
@@ -81,7 +81,7 @@ const ExternalMode = () => {
           <Button
             onClick={closeModal}
             component="a"
-            href="https://jsoncrack.com"
+            href="https://jsoncrack.cmdragon.cn"
             target="_blank"
             variant="outline"
             color="red"

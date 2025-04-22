@@ -14,6 +14,7 @@ import { toBlob, toJpeg, toPng, toSvg } from "html-to-image";
 import { event as gaEvent } from "nextjs-google-analytics";
 import toast from "react-hot-toast";
 import { FiCopy, FiDownload } from "react-icons/fi";
+import { useTranslation } from "../../../hooks/useTranslation";
 
 enum Extensions {
   SVG = "svg",
@@ -63,6 +64,7 @@ function downloadURI(uri: string, name: string) {
 }
 
 export const DownloadModal = ({ opened, onClose }: ModalProps) => {
+  const { t } = useTranslation();
   const [extension, setExtension] = React.useState(Extensions.PNG);
   const [fileDetails, setFileDetails] = React.useState({
     filename: "jsoncrack.com",
@@ -124,9 +126,9 @@ export const DownloadModal = ({ opened, onClose }: ModalProps) => {
     setFileDetails({ ...fileDetails, [key]: value });
 
   return (
-    <Modal opened={opened} onClose={onClose} title="Download Image" centered>
+    <Modal opened={opened} onClose={onClose} title={t("Download Image")} centered>
       <TextInput
-        label="File Name"
+        label={t("File Name")}
         value={fileDetails.filename}
         onChange={e => updateDetails("filename", e.target.value)}
         mb="lg"
@@ -143,7 +145,7 @@ export const DownloadModal = ({ opened, onClose }: ModalProps) => {
         mb="lg"
       />
       <ColorInput
-        label="Background Color"
+        label={t("Background Color")}
         value={fileDetails.backgroundColor}
         onChange={color => updateDetails("backgroundColor", color)}
         withEyeDropper={false}
@@ -160,10 +162,10 @@ export const DownloadModal = ({ opened, onClose }: ModalProps) => {
       <Divider my="xs" />
       <Group justify="right">
         <Button leftSection={<FiCopy />} onClick={clipboardImage}>
-          Clipboard
+          {t("Clipboard")}
         </Button>
         <Button color="green" leftSection={<FiDownload />} onClick={exportAsImage}>
-          Download
+          {t("Download")}
         </Button>
       </Group>
     </Modal>

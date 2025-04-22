@@ -44,7 +44,7 @@ export const TypegenWrapper = ({ from, to }: ConverterPagesProps) => {
       <NextSeo
         {...SEO}
         title={`${fromLabel} to ${toLabel} | JSON Crack`}
-        canonical={`https://jsoncrack.com/converter/${from}-to-${to}`}
+        canonical={`https://jsoncrack.cmdragon.cn/converter/${from}-to-${to}`}
         description={`Instantly generate ${toLabel} from ${fromLabel} using this free online tool. Paste your ${fromLabel} and get the generated ${toLabel} instantly.`}
       />
       <Container mt="xl" size="lg">

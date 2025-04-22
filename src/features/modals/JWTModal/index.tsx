@@ -3,11 +3,13 @@ import type { ModalProps } from "@mantine/core";
 import { Modal, Button, Textarea, Group } from "@mantine/core";
 import { decode } from "jsonwebtoken";
 import { event as gaEvent } from "nextjs-google-analytics";
+import { useTranslation } from "../../../hooks/useTranslation";
 import useFile from "../../../store/useFile";
 
 export const JWTModal = ({ opened, onClose }: ModalProps) => {
   const setContents = useFile(state => state.setContents);
   const [token, setToken] = React.useState("");
+  const { t } = useTranslation();
 
   const resolve = () => {
     if (!token) return;
@@ -20,9 +22,9 @@ export const JWTModal = ({ opened, onClose }: ModalProps) => {
   };
 
   return (
-    <Modal title="Decode JSON Web Token" opened={opened} onClose={onClose} centered>
+    <Modal title={t("Decode JSON Web Token")} opened={opened} onClose={onClose} centered>
       <Textarea
-        placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikhlcm93YW5kIiwidXJsIjoiaHR0cHM6Ly9oZXJvd2FuZC5jb20iLCJpYXQiOjE1MTYyMzkwMjJ9.Tmm3Miq6KWCF_QRn3iERhhXThJzv4LQPKYwBhYUld88"
+        placeholder={t("JWT Example")}
         value={token}
         onChange={e => setToken(e.target.value)}
         autosize
@@ -31,7 +33,7 @@ export const JWTModal = ({ opened, onClose }: ModalProps) => {
       />
       <Group mt="xs" justify="right">
         <Button onClick={resolve} disabled={!token}>
-          Resolve
+          {t("Resolve")}
         </Button>
       </Group>
     </Modal>

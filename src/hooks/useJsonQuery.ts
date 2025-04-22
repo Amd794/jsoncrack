@@ -13,8 +13,24 @@ const useJsonQuery = () => {
 
   const updateJson = async (query: string, cb?: () => void) => {
     try {
+      const json = getJson();
+
+      // 验证JSON字符串是否有效
+      if (!json || typeof json !== "string" || json.trim() === "") {
+        toast.error("Invalid JSON!");
+        return;
+      }
+
+      let parsedJson;
+      try {
+        parsedJson = JSON.parse(json);
+      } catch (parseError) {
+        toast.error("Invalid JSON!");
+        return;
+      }
+
       const jq = await import("jq-web");
-      const res = await jq.promised.json(JSON.parse(getJson()), query);
+      const res = await jq.promised.json(parsedJson, query);
 
       setContents({ contents: JSON.stringify(res, null, 2) });
       cb?.();

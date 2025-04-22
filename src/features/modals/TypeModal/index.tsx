@@ -3,6 +3,7 @@ import type { ModalProps } from "@mantine/core";
 import { Stack, Modal, Select, ScrollArea } from "@mantine/core";
 import { CodeHighlight } from "@mantine/code-highlight";
 import { event as gaEvent } from "nextjs-google-analytics";
+import { useTranslation } from "../../../hooks/useTranslation";
 import useJson from "../../../store/useJson";
 
 enum Language {
@@ -51,6 +52,7 @@ export const TypeModal = ({ opened, onClose }: ModalProps) => {
   const getJson = useJson(state => state.getJson);
   const [type, setType] = React.useState("");
   const [selectedType, setSelectedType] = React.useState<Language>(Language.TypeScript);
+  const { t } = useTranslation();
 
   const editorLanguage = React.useMemo(() => {
     return typeOptions[typeOptions.findIndex(o => o.value === selectedType)]?.lang;
@@ -90,7 +92,7 @@ export const TypeModal = ({ opened, onClose }: ModalProps) => {
   }, [getJson, opened, selectedType, transformer]);
 
   return (
-    <Modal title="Generate Types" size="lg" opened={opened} onClose={onClose} centered>
+    <Modal title={t("Generate Types")} size="lg" opened={opened} onClose={onClose} centered>
       <Stack pos="relative">
         <Select
           value={selectedType}
@@ -104,8 +106,8 @@ export const TypeModal = ({ opened, onClose }: ModalProps) => {
         <ScrollArea.Autosize mah={400} maw={700}>
           <CodeHighlight
             language={editorLanguage}
-            copyLabel="Copy to clipboard"
-            copiedLabel="Copied to clipboard"
+            copyLabel={t("Copy to clipboard")}
+            copiedLabel={t("Copied to clipboard")}
             code={type}
             styles={{ root: { borderRadius: 6 } }}
           />

@@ -41,9 +41,26 @@ const JSONSchemaTool = () => {
   };
 
   const generateJson = async () => {
-    const randomJson = await JSONSchemaFaker.resolve(JSON.parse(jsonSchema));
-    const contents = await jsonToContent(JSON.stringify(randomJson, null, 2), FileFormat.JSON);
-    setJson(contents);
+    try {
+      if (!jsonSchema || typeof jsonSchema !== "string" || jsonSchema.trim() === "") {
+        console.error("Invalid JSON schema");
+        return;
+      }
+
+      let parsedSchema;
+      try {
+        parsedSchema = JSON.parse(jsonSchema);
+      } catch (error) {
+        console.error("Failed to parse JSON schema:", error);
+        return;
+      }
+
+      const randomJson = await JSONSchemaFaker.resolve(parsedSchema);
+      const contents = await jsonToContent(JSON.stringify(randomJson, null, 2), FileFormat.JSON);
+      setJson(contents);
+    } catch (error) {
+      console.error("Error generating JSON:", error);
+    }
   };
 
   return (
@@ -52,7 +69,7 @@ const JSONSchemaTool = () => {
         {...SEO}
         title="JSON Schema Validator & Generator"
         description="Use our JSON Schema Validator & Generator tool to easily validate and generate JSON schemas, and generate data from JSON schemas. Simply input your JSON data, generate the corresponding schema, and validate your data with ease."
-        canonical="https://jsoncrack.com/tools/json-schema"
+        canonical="https://jsoncrack.cmdragon.cn/tools/json-schema"
       />
       <Container mt="xl" size="xl">
         <Title c="black">JSON Schema Validator & Generator</Title>

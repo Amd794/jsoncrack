@@ -3,9 +3,11 @@ import { Flex, Text, TextInput } from "@mantine/core";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useFocusNode } from "../../../hooks/useFocusNode";
+import { useTranslation } from "../../../hooks/useTranslation";
 
 export const SearchInput = () => {
   const [searchValue, setValue, skip, nodeCount, currentNode] = useFocusNode();
+  const { t } = useTranslation();
 
   return (
     <TextInput
@@ -16,7 +18,7 @@ export const SearchInput = () => {
       w={180}
       value={searchValue}
       onChange={e => setValue(e.currentTarget.value)}
-      placeholder="Search Node"
+      placeholder={t("Search Node")}
       autoComplete="off"
       autoCorrect="off"
       onKeyDown={getHotkeyHandler([["Enter", skip]])}

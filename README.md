@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 <p align="center">
-  <a href="https://github.com/AykutSarac/jsoncrack.com">
+  <a href="https://github.com/Amd794/jsoncrack">
    <img src="./public/assets/192.png" height="50" alt="Logo">
   </a>
 
@@ -18,7 +18,7 @@
     ·
     <a href="https://jsoncrack.com">Website</a>
     ·
-    <a href="https://github.com/AykutSarac/jsoncrack.com/issues">Issues</a>
+    <a href="https://github.com/Amd794/jsoncrack/issues">Issues</a>
     ·
     <a href="https://marketplace.visualstudio.com/items?itemName=AykutSarac.jsoncrack-vscode">VS Code</a>
   </p>
@@ -66,7 +66,7 @@ JSON Crack is a tool for visualizing JSON data in a structured, interactive grap
 
 JSON Crack officially launched as v1.0 on the 17th of February 2022 and we've come a long way so far. Watch **releases** of this repository to be notified of future updates:
 
-<a href="https://github.com/AykutSarac/jsoncrack.com"><img src="https://img.shields.io/github/stars/AykutSarac/jsoncrack.com" alt="Star at GitHub" /></a>
+<a href="https://github.com/Amd794/jsoncrack"><img src="https://img.shields.io/github/stars/AykutSarac/jsoncrack.com" alt="Star at GitHub" /></a>
 
 <!-- GETTING STARTED -->
 
@@ -86,16 +86,16 @@ Here is what you need to be able to run JSON Crack.
 
 ### Setup
 
-1. Clone the repo into a public GitHub repository (or fork https://github.com/AykutSarac/jsoncrack.com/fork). If you plan to distribute the code, read the [`LICENSE`](/LICENSE.md) for additional details.
+1. Clone the repo into a public GitHub repository. If you plan to distribute the code, read the [`LICENSE`](/LICENSE.md) for additional details.
 
    ```sh
-   git clone https://github.com/AykutSarac/jsoncrack.com.git
+   git clone https://github.com/Amd794/jsoncrack
    ```
 
 2. Go to the project folder
 
    ```sh
-   cd jsoncrack.com
+   cd jsoncrack
    ```
 
 3. Install packages

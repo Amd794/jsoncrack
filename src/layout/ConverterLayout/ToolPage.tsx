@@ -54,7 +54,7 @@ export const ToolPage = ({ from, to }: ToolPageProps) => {
       <NextSeo
         {...SEO}
         title={`${fromLabel} to ${toLabel} | JSON Crack`}
-        canonical={`https://jsoncrack.com/converter/${from}-to-${to}`}
+        canonical={`https://jsoncrack.cmdragon.cn/converter/${from}-to-${to}`}
         description={`Convert ${fromLabel} to ${toLabel} using this free online tool. Upload your ${fromLabel} file and get the converted ${fromLabel} file instantly.`}
       />
       <Container mt="xl" size="lg">

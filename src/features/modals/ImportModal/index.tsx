@@ -6,11 +6,13 @@ import { event as gaEvent } from "nextjs-google-analytics";
 import toast from "react-hot-toast";
 import { AiOutlineUpload } from "react-icons/ai";
 import type { FileFormat } from "../../../enums/file.enum";
+import { useTranslation } from "../../../hooks/useTranslation";
 import useFile from "../../../store/useFile";
 
 export const ImportModal = ({ opened, onClose }: ModalProps) => {
   const [url, setURL] = React.useState("");
   const [file, setFile] = React.useState<File | null>(null);
+  const { t } = useTranslation();
 
   const setContents = useFile(state => state.setContents);
   const setFormat = useFile(state => state.setFormat);
@@ -19,7 +21,7 @@ export const ImportModal = ({ opened, onClose }: ModalProps) => {
     if (url) {
       setFile(null);
 
-      toast.loading("Loading...", { id: "toastFetch" });
+      toast.loading(t("Loading..."), { id: "toastFetch" });
       gaEvent("fetch_url");
 
       return fetch(url)
@@ -28,7 +30,7 @@ export const ImportModal = ({ opened, onClose }: ModalProps) => {
           setContents({ contents: JSON.stringify(json, null, 2) });
           onClose();
         })
-        .catch(() => toast.error("Failed to fetch JSON!"))
+        .catch(() => toast.error(t("Failed to fetch JSON!")))
         .finally(() => toast.dismiss("toastFetch"));
     } else if (file) {
       const lastIndex = file.name.lastIndexOf(".");
@@ -48,7 +50,7 @@ export const ImportModal = ({ opened, onClose }: ModalProps) => {
 
   return (
     <Modal
-      title="Import File"
+      title={t("Import File")}
       opened={opened}
       onClose={() => {
         setFile(null);
@@ -62,13 +64,13 @@ export const ImportModal = ({ opened, onClose }: ModalProps) => {
           value={url}
           onChange={e => setURL(e.target.value)}
           type="url"
-          placeholder="URL of JSON to fetch"
+          placeholder={t("URL of JSON to fetch")}
           data-autofocus
         />
         <Paper radius="md" style={{ cursor: "pointer" }}>
           <Dropzone
             onDrop={files => setFile(files[0])}
-            onReject={files => toast.error(`Unable to load file ${files[0].file.name}`)}
+            onReject={files => toast.error(t("Unable to load file") + ` ${files[0].file.name}`)}
             maxSize={500 * 1024}
             maxFiles={1}
             p="md"
@@ -82,12 +84,12 @@ export const ImportModal = ({ opened, onClose }: ModalProps) => {
           >
             <Stack justify="center" align="center" gap="sm" mih={220}>
               <AiOutlineUpload size={48} />
-              <Text fw="bold">Drop here or click to upload files</Text>
+              <Text fw="bold">{t("Drop here or click to upload files")}</Text>
               <Text c="dimmed" fz="xs">
-                (Max 500 KB)
+                ({t("Max 500 KB")})
               </Text>
               <Text c="dimmed" fz="sm">
-                {file?.name ?? "None"}
+                {file?.name ?? t("None")}
               </Text>
             </Stack>
           </Dropzone>
@@ -95,7 +97,7 @@ export const ImportModal = ({ opened, onClose }: ModalProps) => {
       </Stack>
       <Group justify="right">
         <Button onClick={handleImportFile} disabled={!(file || url)}>
-          Import
+          {t("Import")}
         </Button>
       </Group>
     </Modal>

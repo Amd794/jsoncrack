@@ -5,12 +5,14 @@ import { event as gaEvent } from "nextjs-google-analytics";
 import { BsCheck2 } from "react-icons/bs";
 import { CgChevronDown } from "react-icons/cg";
 import { ViewMode } from "../../../enums/viewMode.enum";
+import { useTranslation } from "../../../hooks/useTranslation";
 import useConfig from "../../../store/useConfig";
 import { StyledToolElement } from "./styles";
 
 export const ViewMenu = () => {
   const darkmodeEnabled = useConfig(state => state.darkmodeEnabled);
   const toggleDarkMode = useConfig(state => state.toggleDarkMode);
+  const { t } = useTranslation();
   const [viewMode, setViewMode] = useSessionStorage({
     key: "viewMode",
     defaultValue: ViewMode.Graph,
@@ -21,7 +23,7 @@ export const ViewMenu = () => {
       <Menu.Target>
         <StyledToolElement onClick={() => gaEvent("show_view_menu")}>
           <Flex align="center" gap={3}>
-            View <CgChevronDown />
+            {t("View")} <CgChevronDown />
           </Flex>
         </StyledToolElement>
       </Menu.Target>
@@ -36,8 +38,8 @@ export const ViewMenu = () => {
             gaEvent("change_view_mode", { label: e });
           }}
           data={[
-            { value: ViewMode.Graph, label: "Graph" },
-            { value: ViewMode.Tree, label: "Tree" },
+            { value: ViewMode.Graph, label: t("Graph") },
+            { value: ViewMode.Tree, label: t("Tree") },
           ]}
           fullWidth
           mb="4"
@@ -50,7 +52,7 @@ export const ViewMenu = () => {
             gaEvent("toggle_dark_mode", { label: darkmodeEnabled ? "on" : "off" });
           }}
         >
-          <Text size="xs">Dark Mode</Text>
+          <Text size="xs">{t("Dark Mode")}</Text>
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>

@@ -1,14 +1,14 @@
-import React from "react";
-import Link from "next/link";
-import { Flex, Group, Select, Button } from "@mantine/core";
+import React, { useMemo } from "react";
+import { Group, Select, Button } from "@mantine/core";
 import styled from "styled-components";
 import toast from "react-hot-toast";
 import { AiOutlineFullscreen } from "react-icons/ai";
-import { FaBolt, FaGithub } from "react-icons/fa6";
+import { FaToolbox } from "react-icons/fa";
 import { type FileFormat, formats } from "../../../enums/file.enum";
-import { JSONCrackLogo } from "../../../layout/JsonCrackLogo";
+import { useTranslation } from "../../../hooks/useTranslation";
 import useFile from "../../../store/useFile";
 import { FileMenu } from "./FileMenu";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ToolsMenu } from "./ToolsMenu";
 import { ViewMenu } from "./ViewMenu";
 import { StyledToolElement } from "./styles";
@@ -32,28 +32,26 @@ const StyledTools = styled.div`
   }
 `;
 
-function fullscreenBrowser() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(() => {
-      toast.error("Unable to enter fullscreen mode.");
-    });
-  } else if (document.exitFullscreen) {
-    document.exitFullscreen();
-  }
-}
-
 export const Toolbar = () => {
   const setFormat = useFile(state => state.setFormat);
   const format = useFile(state => state.format);
+  const { t, currentLanguage } = useTranslation();
+
+  const translationKey = useMemo(() => `translate-key-${currentLanguage}`, [currentLanguage]);
+
+  const fullscreenBrowser = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {
+        toast.error(t("Unable to enter fullscreen mode."));
+      });
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  };
 
   return (
     <StyledTools>
       <Group gap="xs" justify="left" w="100%" style={{ flexWrap: "nowrap" }}>
-        <StyledToolElement title="JSON Crack">
-          <Flex gap="xs" align="center" justify="center">
-            <JSONCrackLogo fontSize="0.8rem" hideLogo />
-          </Flex>
-        </StyledToolElement>
         <Select
           defaultValue="json"
           size="xs"
@@ -65,31 +63,32 @@ export const Toolbar = () => {
           allowDeselect={false}
         />
 
-        <FileMenu />
-        <ViewMenu />
-        <ToolsMenu />
+        <FileMenu key={`file-menu-${translationKey}`} />
+        <ViewMenu key={`view-menu-${translationKey}`} />
+        <ToolsMenu key={`tools-menu-${translationKey}`} />
+
         <Button
-          component={Link}
-          href="https://todiagram.com/editor?utm_source=jsoncrack&utm_medium=toolbar"
+          component="a"
+          href="https://tools.cmdragon.cn/"
           target="_blank"
           rel="noopener"
-          autoContrast
-          color="green"
+          color="blue"
           size="compact-sm"
           fz="12"
           fw="600"
-          leftSection={<FaBolt />}
+          leftSection={<FaToolbox size={14} />}
+          key={`more-tools-${translationKey}`}
         >
-          JSON Crack v2.0
+          {t("More Tools")}
         </Button>
       </Group>
       <Group gap="xs" justify="right" w="100%" style={{ flexWrap: "nowrap" }}>
-        <Link href="https://github.com/AykutSarac/jsoncrack.com" rel="noopener" target="_blank">
-          <StyledToolElement title="GitHub">
-            <FaGithub size="18" />
-          </StyledToolElement>
-        </Link>
-        <StyledToolElement title="Fullscreen" onClick={fullscreenBrowser}>
+        <LanguageSwitcher key={`lang-switcher-${translationKey}`} />
+        <StyledToolElement
+          title={t("Fullscreen")}
+          onClick={fullscreenBrowser}
+          key={`fullscreen-${translationKey}`}
+        >
           <AiOutlineFullscreen size="18" />
         </StyledToolElement>
       </Group>

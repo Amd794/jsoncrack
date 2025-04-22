@@ -1,17 +1,9 @@
 import React from "react";
-import Link from "next/link";
 import { Flex, Popover, Text } from "@mantine/core";
 import styled from "styled-components";
 import { event as gaEvent } from "nextjs-google-analytics";
 import { BiSolidDockLeft } from "react-icons/bi";
-import {
-  VscCheck,
-  VscError,
-  VscFeedback,
-  VscRunAll,
-  VscSync,
-  VscSyncIgnored,
-} from "react-icons/vsc";
+import { VscCheck, VscError, VscRunAll, VscSync, VscSyncIgnored } from "react-icons/vsc";
 import useConfig from "../../store/useConfig";
 import useFile from "../../store/useFile";
 import useGraph from "./views/GraphView/stores/useGraph";
@@ -145,16 +137,6 @@ export const BottomBar = () => {
 
       <StyledRight>
         <StyledBottomBarItem>Nodes: {nodeCount}</StyledBottomBarItem>
-        <Link
-          href="https://github.com/AykutSarac/jsoncrack.com/discussions"
-          target="_blank"
-          rel="noopener"
-        >
-          <StyledBottomBarItem>
-            <VscFeedback />
-            Feedback
-          </StyledBottomBarItem>
-        </Link>
       </StyledRight>
     </StyledBottomBar>
   );

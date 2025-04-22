@@ -42,7 +42,7 @@ const Docs = () => {
         {...SEO}
         title="Documentation - JSON Crack"
         description="Integrate JSON Crack widgets into your website."
-        canonical="https://jsoncrack.com/docs"
+        canonical="https://jsoncrack.cmdragon.cn/docs"
       />
       <Stack mx="auto" maw="90%">
         <Group mb="lg" mt={40}>
@@ -62,10 +62,10 @@ const Docs = () => {
               the editor:{" "}
               <StyledHighlight
                 as="a"
-                href="https://jsoncrack.com/editor?json=https://catfact.ninja/fact"
+                href="https://jsoncrack.cmdragon.cn/editor?json=https://catfact.ninja/fact"
                 $link
               >
-                https://jsoncrack.com/editor?json=https://catfact.ninja/fact
+                https://jsoncrack.cmdragon.cn/editor?json=https://catfact.ninja/fact
               </StyledHighlight>
             </Text>
 
