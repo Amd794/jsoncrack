@@ -1,6 +1,6 @@
 # Welcome to the JSON Crack Contributing Guide <!-- omit in toc -->
 
-Thank you for investing your time in contributing to our project! Any contribution you make will be reflected at [jsoncrack.com](https://jsoncrack.com).
+Thank you for investing your time in contributing to our project! Any contribution you make will be reflected at [jsoncrack.com](https://jsoncrack.cmdragon.cn).
 
 Read our [Code of Conduct](./CODE_OF_CONDUCT.md) to keep our community approachable and respectable.
 
@@ -59,4 +59,4 @@ We appreciate any contributions to JSON Crack, big or small. If you have any que
 
 Congratulations :tada::tada: The JSON Crack team thanks you :sparkles:.
 
-Once your PR is merged, your contributions will become part of the next JSON Crack release, and will be visible in the [JSON Crack app](https://jsoncrack.com).
+Once your PR is merged, your contributions will become part of the next JSON Crack release, and will be visible in the [JSON Crack app](https://jsoncrack.cmdragon.cn).

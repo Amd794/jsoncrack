@@ -9,14 +9,14 @@
   <p align="center">
     The open-source JSON Editor.
     <br />
-    <a href="https://jsoncrack.com"><strong>Learn more »</strong></a>
+    <a href="https://jsoncrack.cmdragon.cn"><strong>Learn more »</strong></a>
     <br />
     <br />
     <a href="https://todiagram.com">ToDiagram</a>
     ·
     <a href="https://discord.gg/yVyTtCRueq">Discord</a>
     ·
-    <a href="https://jsoncrack.com">Website</a>
+    <a href="https://jsoncrack.cmdragon.cn">Website</a>
     ·
     <a href="https://github.com/Amd794/jsoncrack/issues">Issues</a>
     ·
