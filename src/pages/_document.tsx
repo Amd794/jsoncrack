@@ -35,7 +35,6 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <ColorSchemeScript />
-          <script type='text/javascript' src='//pl28089058.effectivegatecpm.com/a0/01/56/a0015632c2820978eaea8725efc98870.js'></script>
           <script
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2874982874195135"
