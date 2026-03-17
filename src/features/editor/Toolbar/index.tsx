@@ -3,10 +3,11 @@ import { Group, Select, Button } from "@mantine/core";
 import styled from "styled-components";
 import toast from "react-hot-toast";
 import { AiOutlineFullscreen } from "react-icons/ai";
-import { FaToolbox } from "react-icons/fa";
+import { FaToolbox, FaWeixin } from "react-icons/fa";
 import { type FileFormat, formats } from "../../../enums/file.enum";
 import { useTranslation } from "../../../hooks/useTranslation";
 import useFile from "../../../store/useFile";
+import { useModal } from "../../../store/useModal";
 import { FileMenu } from "./FileMenu";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ToolsMenu } from "./ToolsMenu";
@@ -49,6 +50,12 @@ export const Toolbar = () => {
     }
   };
 
+  const setVisible = useModal(state => state.setVisible);
+
+  const openWechatModal = () => {
+    setVisible("WechatModal", true);
+  };
+
   return (
     <StyledTools>
       <Group gap="xs" justify="left" w="100%" style={{ flexWrap: "nowrap" }}>
@@ -83,6 +90,13 @@ export const Toolbar = () => {
         </Button>
       </Group>
       <Group gap="xs" justify="right" w="100%" style={{ flexWrap: "nowrap" }}>
+        <StyledToolElement
+          title={t("WeChat Official Account")}
+          onClick={openWechatModal}
+          key={`wechat-${translationKey}`}
+        >
+          <FaWeixin size="18" />
+        </StyledToolElement>
         <LanguageSwitcher key={`lang-switcher-${translationKey}`} />
         <StyledToolElement
           title={t("Fullscreen")}

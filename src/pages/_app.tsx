@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { createTheme, MantineProvider } from "@mantine/core";
@@ -12,6 +12,8 @@ import GlobalStyle from "../constants/globalStyle";
 import { SEO } from "../constants/seo";
 import { lightTheme } from "../constants/theme";
 import { smartColorSchemeManager } from "../lib/utils/mantineColorScheme";
+import ModalController from "../features/modals/ModalController";
+import { useModal } from "../store/useModal";
 
 const theme = createTheme({
   autoContrast: true,
@@ -56,6 +58,7 @@ const IS_PROD = process.env.NODE_ENV === "production";
 
 function JsonCrack({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
+  const setVisible = useModal(state => state.setVisible);
 
   // Create a single smart manager that handles pathname logic internally
   const colorSchemeManager = smartColorSchemeManager({
@@ -63,6 +66,11 @@ function JsonCrack({ Component, pageProps }: AppProps) {
     getPathname: () => pathname,
     dynamicPaths: ["/editor"], // Only editor paths use dynamic theme
   });
+
+  // Automatically open WeChat modal on page load
+  useEffect(() => {
+    setVisible("WechatModal", true);
+  }, [setVisible]);
 
   return (
     <>
@@ -101,6 +109,7 @@ function JsonCrack({ Component, pageProps }: AppProps) {
           <GlobalStyle />
           {IS_PROD && <GoogleAnalytics trackPageViews />}
           <Component {...pageProps} />
+          <ModalController />
         </ThemeProvider>
       </MantineProvider>
     </>

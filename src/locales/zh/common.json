@@ -143,5 +143,9 @@
   "id": "id",
   "attribute so you can listen for it as in the example below to ensure its loaded and ready to listen for messages.": "属性，以便您可以像下面的示例那样监听它，确保它已加载并准备好接收消息。",
   "Open JSON Crack": "打开 JSON Crack",
-  "JSON to YAML Converter": "JSON 转 YAML 转换器"
+  "JSON to YAML Converter": "JSON 转 YAML 转换器",
+  "WeChat Official Account": "微信公众号",
+  "Scan QR Code to Follow": "扫码关注",
+  "Get the latest updates and tips about JSON Crack": "获取关于 JSON Crack 的最新更新和提示",
+  "Thank you for your support!": "感谢您的支持！"
 }
